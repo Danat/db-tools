@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+    ms-db:
+        image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+        container_name: ${MSSQL_HOST}
+        restart: always
+        env_file:
+            - .env
+        environment:
+            - SA_PASSWORD=${SA_PASSWORD}
+            - ACCEPT_EULA=Y
+        ports:
+            - 1433:1433
+        volumes:
+            - "./data/db/mssql:/var/opt/mssql"
+
+#A strong system administrator (SA) password: At least 8 characters including uppercase, lowercase letters, base-10 digits and/or non-alphanumeric symbols.
+# sqml .env file :
+# MSSQL_HOST=MSSQL
+# SA_PASSWORD=Admin_12345
+#
